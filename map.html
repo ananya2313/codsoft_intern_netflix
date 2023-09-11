@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Road Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    var map = L.map('map').setView([28.463891, 77.489808], 15); // Set the center and zoom level of the map to Noida Institute of Engineering and Technology
+
+    // Add a tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
+
+    // Add a marker for Noida Institute of Engineering and Technology
+    var noida = L.marker([28.463891, 77.489808]).addTo(map);
+    noida.bindPopup("<b>Noida Institute of Engineering and Technology</b><br>A premier engineering college located in Noida, India.").openPopup();
+
+    // Add a hazard zone
+    var hazardZone = L.circle([28.464829, 77.494694], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.2,
+      radius: 500 // set the radius of the circle to 500 meters
+    }).addTo(map);
+    hazardZone.bindPopup("<b>Hazard Zone</b><br>This area has been identified as a hazardous zone due to high accident rates.").openPopup();
+
+  </script>
+</body>
+</html>
